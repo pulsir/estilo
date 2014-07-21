@@ -1,0 +1,5 @@
+landing-background: background.jpg;
+font-family: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
+btn-color-landing: #fff;
+btn-bck-landing: rgba(255,255,255,.5);
+btn-bck-landing-hover: rgba(255,255,255,.8);
