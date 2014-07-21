@@ -1,3 +1,0 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
-[[include: bootstrap.css]]
-[[include: landing.elcss]]
