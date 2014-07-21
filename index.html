@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Make CSS easy. — Estilo</title>
+	<link rel="stylesheet" href="estilo.css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="landing">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="page-header">
+						<a href="index.html">
+							<b>estilo</b>.elcss
+						</a>
+
+						<a class="lnk pull-right" href="#getstarted">
+							Get started
+						</a>
+						<a class="lnk pull-right" href="#docs">
+							Documentation
+						</a>
+						<a class="lnk pull-right" href="http://github.com/pulsir/estilo">
+							Visit on GitHub
+						</a>
+					</div>
+				</div></div></div>
+				<div class="contain" style="width:100% !important;max-width:100% !important;height:820px !important;max-height:820px !important;margin-top:25%;">
+					<h1 class="text-center">A CSS preprocessor. Built for PHP developers.</h1>
+					<p class="text-center lead">With features like on-the-fly processing, minification and more, it's built for PHP.</p>
+					<p class="text-center">
+						<a class="btn btn-primary" href="#more">Learn more</a>
+						<a class="btn btn-primary" href="#getstarted">Get started</a>
+					</p>
+				</div>
+			</div>
+
+			<div class="container">
+				<a id="more"></a>
+				<h3>Estilo is made for you.</h3>
+				<p>Need on the fly CSS preprocessing and minification or a PHP compiler? Don't have the time to learn a lot of new things? <b>Welcome to Estilo.</b></p>
+				<p>Look at how a page looks in Estilo:</p>
+				<code><pre>
+					[[include: buttons.elcss]]
+					body{<br>
+					background-color: [[var: body-background]];<br>
+					color: [[var: text-color]];<br>
+				}<br>
+				a:link{<br>
+				text-decoration: [[var: text-decoration-on-links]];<br>
+			}<br>
+		</pre></code> 
+		<p>And this is the CSS Estilo generates:</p>
+		<code><pre>
+			.btn{border-radius:3px;background-color:rgba(255,255,255,.5);color:#fff;}.btn:hover{background-color:#rgba(255,255,255,.8);}body{background:color:#e5e5e5;color:#000;}a:link{text-decoration:none;}
+		</pre></code>
+	</div>
+
+	<hr>
+
+	<div class="container">
+		<a id="getstarted"></a>
+		<h3>Get started.</h3>
+		<h4>First of all, download Estilo.</h4>
+		<a class="btn btn-primary btn-large" href="https://github.com/pulsir/estilo/archive/master.zip">Download ZIP from GitHub</a><br>
+		<small><a href="http://github.com/pulsir/estilo">or visit the source</a></small>
+		<h4>Then, read our <a href="#docs-how-estilo-works">How Estilo works</a> guide.</h4>
+		<p><b>It takes just a few minutes to learn Estilo.</b></p>
+		<div class="alert alert-info">Estilo is minimalistic and lacks more advanced features like conditions. If you need them, look at <a href="http://sass-lang.com/">Sass</a> or <a href="http://lesscss.org/">Less</a>. We will be working on conversions and other new features soon.
+		</div>
+
+		<hr>
+
+		<div class="container">
+			<a id="docs"></a>
+			<h2>Documentation</h2>
+			<h4>Table of contents</h4>
+			<div class="list-group">
+				<a href="#" class="list-group-item list-group-item-info">Getting started</a>
+				<a href="#how-estilo-works" class="list-group-item">How Estilo works</a>
+				<a href="#ignoring" class="list-group-item">Ignoring</a>
+				<a href="#" class="list-group-item list-group-item-info">Configuring Estilo</a>
+				<a href="#constants" class="list-group-item">Constants</a>
+				<!--<a href="#doing-everything-on-the-fly" class="list-group-item">Doing everything on the fly</a>-->
+				<a href="#" class="list-group-item list-group-item-info">Contributing information</a>
+				<a href="#contributing" class="list-group-item">Contributing</a>
+				<a href="#licence" class="list-group-item">Licence</a>
+			</div>
+
+			<h3>How Estilo works</h3><a id="how-estilo-works"></a>
+			<p>Estilo has three PHP files - <b>estilo.php</b>, which is the Estilo engine, <b>generate.php</b> which is the script that generates CSS (you can link to that if you're using it on the fly) or cron it to compile the CSS. Estilo also has a file called <b>constants.php</b> and that's the file where you can change preferences. We'll talk about this a bit more in <a href="#constants">Constants</a></p>
+			<p>Okay, let's create a file and name it <b>main.elcss</b>. Now, you can write normal CSS as you would usually. If you need to include another file, just use this: <code>[[include: filename.css]]</code> or <code>[[include: filename.elcss]]</code>. Basically, if your file looks like this:
+				<code><pre>.btn{border-radius:3px;background-color:rgba(255,255,255,.5);color:#fff;}.btn:hover{background-color:#rgba(255,255,255,.8);}body{background:color:#e5e5e5;color:#000;}a:link{text-decoration:none;}</pre></code>
+				you can put everything related to buttons to <b>buttons.elcss</b> and just replace it with [[include: buttons.elcss]]. Your code would look something like this then:
+				<code><pre>[[include: buttons.elcss]] <br> body{background:color:#e5e5e5;color:#000;}<br>a:link{text-decoration:none;}</pre></code></p>
+				<p>If you need to reuse a value, it's good practice to put in a variable. All variables in Estilo are stored in <b>variables.elcss</b>. For instance, you may reuse that font color. Use this to set it in <b>variables.elcss</b>.</p>
+				<code><pre>text-color: #000;</pre></code>
+				and you can replace it the file like this:
+				<code><pre>[[include: buttons.elcss]] <br> body{background:color:#e5e5e5;color:<b>[[var: text-color]]</b>;}<br>a:link{text-decoration:none;}</pre></code></p>
+				<p><b>Let's compile it.</b> Open up generate.php (by default, it also works on-the-fly, so you can link to it from HTML and it will work) and you'll get the compiled CSS, which will also be stored in the <b>estilo-generated-css.css</b> file. (You can change this location by changing a constant, we'll talk about that more later.) Estilo automatically generated CSS from your .elcss files and serves them minified.</p>
+				<p><b>A few tips:</b> Spaces in [[include: derp.elcss]], [[var: derp]], and varname: value; are important syntactically and your code won't work without them. — Estilo only looks for variables in <b>variables.elcss</b>, so make sure you save them there.</p> 
+
+				<hr>
+
+				<h3>Ignoring</h3><a id="ignoring"></a>
+				<p>Estilo has trouble with commenting out [[commands]], so you need to comment them out like this:
+					<code><pre>[[<b>//</b>include: derp.css]]<br>[[<b>//</b>var: some-ignored-command]]</pre></code>
+					We're working on making normal CSS comments work with commands, though.</p>
+
+					<hr>
+
+					<h3>Constants</h3><a id="constants"></a>
+					<p>Estilo is configured in <b>constants.php</b>, using - you've guessed it - PHP constants.</p>
+					<p>Basically, Estilo has these constants: <b>default_file</b>, <b>show_results_on_generator</b>, <b>store_generated_css_in</b>, <b>minify_generated_css</b> and <b>on_the_fly</b>.</p>
+					<h4>default_file</h4>
+					<p>Sets the default Estilo file, the file that Estilo starts looking and compiling from, must be an .elcss file. In our examples, it's <b>main.elcss</b>.</p><br>
+
+					<h4>show_results_on_generator</h4>
+					<p>Should Estilo show the CSS it generates on generate.php? <b>true</b> or <b>false</b>, case sensitive. Must be true if <b>on_the_fly</b> is set to true.</p><br>
+
+					<h4>store_generated_css_in</h4>
+					<p>Where should Estilo store the generated CSS? If you don't want Estilo to save the compiled CSS, use /dev/null as the value if you're on Linux.</p><br>
+
+					<h4>minify_generated_css</h4>
+					<p>Should Estilo minify the CSS it generates when compiling for faster load times? The compiled CSS will not contain spaces, whitespace and comments. <b>true</b> or <b>false</b>, case sensitive. </p><br>
+
+					<h4>on_the_fly</h4>
+					<p>Should Estilo set the mimetype to text/css and allow generate.php to behave like a CSS file so you can use it as a link to a stylesheet in HTML and compile on-the-fly? <b>true</b> or <b>false</b>, case sensitive. If set to true, <b>show_results_on_generator</b> must be set to true as well for this to work </p><br>
+
+					<hr>
+
+					<h3>Contributing</h3><a id="contributing"></a>
+					<p>Want to contribute to Estilo? Great.</p>
+					<p>First of all, fork it <a href="http://github.com/pulsir/estilo">on GitHub</a>. Then, create your feature branch (<code>git checkout -b my-really-epic-awesome-amazing-feature</code>), commit your changes (<code>git commit -am "Added something really awesome")</code>, push to the branch (<code>git push origin my-really-epic-awesome-amazing-feature</code>). Then, create new pull request on GitHub. For more information on how to do this, <a href="https://help.github.com/articles/using-pull-requests">read this GitHub Help article</a>.</p>
+					<p>When contributing to Estilo, you irrevocably give the right to Estilo to use your code, modify it, relicense it, develop it further and transfer ownership of the code and all rights on it to the Estilo project. Your code will be available to the public under the <a href="#licence">:) Licence</a>.</p>
+
+					<hr>
+
+					<h3>Licence</h3><a id="licence"></a>
+					<p>Estilo is licenced under <a href="http://licence.visualidiot.com">the :) licence</a>, the amazing licence by <a href="http://twitter.com/idiot">@idiot</a>, like other Pulsir projects.</p>
+
+
+				</div>
+			<div class="container">
+			<hr><br><br>
+			<div class="footer">
+			Built with love by <a href="http://team.pulsir.co">the Pulsir team</a>.
+			</div>
+			</div>
+			<script>
+				!function(g,s,q,r,d){r=g[r]=g[r]||function(){(r.q=r.q||[]).push(
+					arguments)};d=s.createElement(q);q=s.getElementsByTagName(q)[0];
+				d.src='//d1l6p2sc9645hc.cloudfront.net/tracker.js';q.parentNode.
+				insertBefore(d,q)}(window,document,'script','_gs');
+
+				_gs('GSN-188468-D');
+			</script>
+		</body>
+		</html>

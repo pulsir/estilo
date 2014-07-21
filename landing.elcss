@@ -1,0 +1,35 @@
+.landing{
+  background-image: url('[[var: landing-background]]');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  max-height: 100% !important;
+  width: auto;
+  margin-bottom: 20px;
+  color:#fff !important;
+}
+.landing .btn {
+  border-radius: 3px;
+  background-color: [[var: btn-bck-landing]];
+  color: [[var: btn-color-landing]];
+}
+.landing .btn:hover {
+  background-color: [[var: btn-bck-landing-hvr]];
+}
+.page-header{
+	border-bottom:0px;
+}
+
+.page-header a:link{
+	color:#fff !important;
+	text-decoration:none;
+}
+
+.page-header a:link:hover{
+	color:#e5e5e5 !important;
+	text-decoration:none;
+}
+
+.lnk{
+	margin-right:6px;	
+}
